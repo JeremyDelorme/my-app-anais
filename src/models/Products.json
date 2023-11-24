@@ -1,0 +1,21 @@
+{
+    "cartId": "1234567890",
+    "items": [
+        {
+            "id": "item_1",
+            "name": "Product 1",
+            "price": 25.99,
+            "quantity": 2,
+            "image": "https://example.com/product1.jpg"
+        },
+        {
+            "id": "item_2",
+            "name": "Product 2",
+            "price": 19.99,
+            "quantity": 1,
+            "image": "https://example.com/product2.jpg"
+        }
+    ],
+    "totalItems": 3,
+    "totalPrice": 71.97
+}

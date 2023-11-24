@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavbarComponent from './components/NavbarComponent';
+import initializeStripe from '../src/utils/initializeStripe';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
 
-function App() {
+
+import HomePage from './pages/HomePage';
+import CartPage from './pages/CartPage';
+import AboutPage from './pages/AboutPage';
+import ShopPage from './pages/ShopPage';
+import ContactPage from './pages/ContactPage';
+
+import { Stripe } from '@stripe/stripe-js';
+
+const App = () => {
+  const [stripePromise, setStripePromise] = useState<Promise<Stripe | null>>(Promise.resolve(null));
+
+  useEffect(() => {
+    const fetchStripe = async () => {
+      const stripe = await initializeStripe();
+      setStripePromise(() => stripe ? Promise.resolve(stripe) : Promise.resolve(null));
+    };
+    fetchStripe();
+
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDsITubRs-XzL-f-4TODCBfzla7MPhjVaE",
+      authDomain: "my-app-anais.firebaseapp.com",
+      databaseURL: "https://my-app-anais-default-rtdb.firebaseio.com",
+      projectId: "my-app-anais",
+      storageBucket: "my-app-anais.appspot.com",
+      messagingSenderId: "1015473953482",
+      appId: "1:1015473953482:web:ec84064fb16007f17e3233"
+    };
+    firebase.initializeApp(firebaseConfig);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <NavbarComponent stripePromise={stripePromise} />
+        <hr />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "backend/scripts/uploadProductsToStorage.ts",
+    "backend/scripts/firebaseConfig.js"
   ]
 }
