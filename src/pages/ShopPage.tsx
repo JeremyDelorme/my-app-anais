@@ -2,6 +2,8 @@ import { items as productsDataItems } from '../productsData';
 import { Container, Typography, Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
 import { Product } from '../productsData'; // Ensure the import path is correct
 
+import ButtonComponent from '../components/ButtonComponent';
+
 const cardMediaStyle = {
     height: 250, // Adjusted height
 };
@@ -14,17 +16,17 @@ const ShopPage = () => {
     return (
         <Container sx={{ py: 6 }}>
             <Typography variant="h3" align="center" gutterBottom color="primary" mt={5}>
-                Welcome to Our Gallery
+                Ça c'est mes affaires
             </Typography>
             {/* ... Existing content */}
 
             <Typography variant="h4" align="center" mt={6} color="primary">
-                Prints
+                Pressions
             </Typography>
             <Grid container justifyContent="center" spacing={4}>
                 {prints.map((print) => (
                     <Grid item key={print.id} xs={12} sm={6} md={4}>
-                        <Card>
+                        <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
                             <CardMedia
                                 component="img"
                                 style={cardMediaStyle}
@@ -35,9 +37,8 @@ const ShopPage = () => {
                                 <Typography variant="h6">{print.name}</Typography>
                                 <Typography variant="body1">Price: ${print.price}</Typography>
                                 <Typography variant="body1">Quantity: {print.quantity}</Typography>
-                                {/* Additional print card details */}
+                                <ButtonComponent>Aweye donc</ButtonComponent>
                             </CardContent>
-                            <Button variant="contained" sx={{ bgcolor: vibrantColors[Math.floor(Math.random() * vibrantColors.length)] }}>See More</Button>
                         </Card>
                     </Grid>
                 ))}
